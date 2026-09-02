@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Text to Moodle XML</title>
+	<style>
+		:root {
+			--ink: #17242b;
+			--muted: #65747a;
+			--paper: #fffdf8;
+			--line: #d9e0dc;
+			--teal: #087f78;
+			--teal-dark: #05635f;
+			--orange: #ed7d4d;
+			--warning: #9a5c06;
+			--warning-bg: #fff4df;
+			--shadow: 0 20px 55px rgba(23, 36, 43, .12);
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			color: var(--ink);
+			font-family: Georgia, "Times New Roman", serif;
+			background: #e9f0ed;
+			background-image: radial-gradient(#c9dcd5 1px, transparent 1px);
+			background-size: 22px 22px;
+		}
+
+		.page { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 54px 0 72px; }
+		header { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 28px; }
+		.eyebrow { margin: 0 0 10px; color: var(--orange); font: 700 12px/1.2 Arial, sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+		h1 { margin: 0; max-width: 650px; font-size: clamp(34px, 5vw, 58px); line-height: .98; font-weight: 700; }
+		.intro { max-width: 310px; margin: 0; color: var(--muted); font: 15px/1.55 Arial, sans-serif; }
+		.workspace { display: grid; gap: 18px; }
+		.panel { background: var(--paper); border: 1px solid rgba(23, 36, 43, .12); box-shadow: var(--shadow); }
+		.input-panel { padding: 24px; }
+		.panel-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 13px; }
+		h2 { margin: 0; font-size: 21px; }
+		.hint { margin: 0; color: var(--muted); font: 12px Arial, sans-serif; }
+		textarea {
+			display: block; width: 100%; min-height: 255px; resize: vertical; padding: 17px;
+			border: 1px solid var(--line); border-radius: 3px; color: var(--ink); background: #f8faf7;
+			font: 15px/1.6 Consolas, "Courier New", monospace; outline: none;
+		}
+		textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(8, 127, 120, .12); }
+		.format { margin: 12px 0 0; color: var(--muted); font: 12px/1.5 Arial, sans-serif; }
+		.format code { color: var(--teal-dark); font-family: Consolas, monospace; }
+		.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 19px; }
+		button { border: 0; border-radius: 3px; padding: 12px 17px; color: white; background: var(--teal); font: 700 14px Arial, sans-serif; cursor: pointer; }
+		button:hover { background: var(--teal-dark); }
+		button.secondary { color: var(--ink); background: #dce7e2; }
+		button.secondary:hover { background: #cbdad4; }
+		button:disabled { cursor: not-allowed; opacity: .48; }
+		.status { margin: 14px 0 0; min-height: 18px; color: var(--muted); font: 12px Arial, sans-serif; }
+		.status.success { color: var(--teal-dark); }
+		.warnings-panel { padding: 22px 24px; }
+		.warning-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+		.warning-list li { padding: 10px 12px; border-left: 3px solid var(--warning); color: var(--warning); background: var(--warning-bg); font: 13px/1.45 Arial, sans-serif; }
+		.warning-list li.ok { border-color: var(--teal); color: var(--teal-dark); background: #e8f5ef; }
+		.empty { margin: 0; color: var(--muted); font: 13px Arial, sans-serif; }
+		.xml-panel { overflow: hidden; }
+		.xml-heading { display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid var(--line); }
+		.xml-heading h2 { font-size: 19px; }
+		pre { margin: 0; padding: 22px 24px; min-height: 235px; max-height: 520px; overflow: auto; color: #d6e8df; background: #172a2c; font: 13px/1.6 Consolas, "Courier New", monospace; white-space: pre-wrap; word-break: break-word; }
+
+		@media (max-width: 650px) {
+			.page { width: min(100% - 20px, 1120px); padding-top: 30px; }
+			header { display: block; }
+			.intro { margin-top: 16px; }
+			.input-panel, .warnings-panel { padding: 18px; }
+			.panel-heading { display: block; }
+			.hint { display: block; margin-top: 6px; }
+			.xml-heading { padding: 16px 18px; }
+			pre { padding: 18px; font-size: 11px; }
+		}
+	</style>
+</head>
+<body>
+	<main class="page">
+		<header>
+			<div>
+				<p class="eyebrow">Moodle question bank</p>
+				<h1>Text in.<br>Questions out.</h1>
+			</div>
+			<p class="intro">Turn plain-text multiple-choice questions into an import-ready Moodle XML file.</p>
+		</header>
+
+		<div class="workspace">
+			<section class="panel input-panel" aria-labelledby="input-title">
+				<div class="panel-heading">
+					<h2 id="input-title">Question text</h2>
+					<p class="hint">One question per block</p>
+				</div>
+				<textarea id="question-input" aria-label="Question text input" spellcheck="false" placeholder="multichoice\nQuestion (1)\nWhich planet is known as the Red Planet?\nA. Earth\nB. Mars\nC. Venus\nD. Jupiter\nAnswer: B\n\nmultichoice\nQuestion (2)\nWhich planet do we live on?\nA. Mars\nB. Earth\nC. Venus\nD. Jupiter\nAnswer: B"></textarea>
+				<p class="format">Format: start each block with <code>multichoice</code> or <code>truefalse</code>, then its question heading, question text, and <code>Answer:</code>.</p>
+				<div class="actions">
+					<button id="preview-button" type="button">Preview XML</button>
+					<button id="download-button" class="secondary" type="button" disabled>Download XML</button>
+				</div>
+				<p id="status" class="status" role="status"></p>
+			</section>
+
+			<section class="panel warnings-panel" aria-labelledby="warnings-title">
+				<div class="panel-heading">
+					<h2 id="warnings-title">Question checks</h2>
+					<p class="hint" id="question-count">No questions loaded</p>
+				</div>
+				<ul id="warning-list" class="warning-list">
+					<li class="empty">Preview your questions to see validation results.</li>
+				</ul>
+			</section>
+
+			<section class="panel xml-panel" aria-labelledby="xml-title">
+				<div class="xml-heading">
+					<h2 id="xml-title">XML preview</h2>
+				</div>
+				<pre id="xml-output" aria-live="polite">Your generated Moodle XML will appear here.</pre>
+			</section>
+		</div>
+	</main>
+
+	<script>
+		const input = document.getElementById('question-input');
+		const previewButton = document.getElementById('preview-button');
+		const downloadButton = document.getElementById('download-button');
+		const warningList = document.getElementById('warning-list');
+		const questionCount = document.getElementById('question-count');
+		const xmlOutput = document.getElementById('xml-output');
+		const status = document.getElementById('status');
+		let currentXml = '';
+
+		function escapeXml(value) {
+			return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+		}
+
+		function escapeCdata(value) {
+			return value.replace(/]]>/g, ']]]]><![CDATA[>');
+		}
+
+		function parseQuestions(text) {
+			return text.trim().split(/\n\s*\n/).filter(Boolean).map((block, index) => {
+				const lines = block.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+				const type = lines.find(line => /^(multichoice|truefalse)$/i.test(line))?.toLowerCase() || 'multichoice';
+				const headingIndex = lines.findIndex(line => /^question\s*(?:\(\s*\d+\s*\)|\d+)$/i.test(line));
+				const heading = headingIndex >= 0 ? lines[headingIndex] : `Question (${index + 1})`;
+				const numberMatch = heading.match(/\d+/);
+				const number = numberMatch ? numberMatch[0] : String(index + 1);
+				const questionLine = headingIndex >= 0 ? lines[headingIndex + 1] : '';
+				const options = lines.filter(line => /^[A-Z][.)]\s+/.test(line)).map(line => ({
+					key: line[0].toUpperCase(), text: line.replace(/^[A-Z][.)]\s+/, '').trim(), correct: false
+				}));
+				const answerLine = lines.find(line => /^answer\s*:/i.test(line));
+				const answer = answerLine ? answerLine.replace(/^answer\s*:/i, '').trim().toUpperCase() : '';
+				if (answer) options.forEach(option => { option.correct = option.key === answer || option.text.toUpperCase() === answer; });
+				return { type, number, heading, question: questionLine, options, answer, warnings: [] };
+			});
+		}
+
+		function buildXml(questions) {
+			const entries = questions.map(question => {
+				if (question.type === 'truefalse') {
+					const trueCorrect = question.answer === 'TRUE';
+					return `\n  <!-- Question entry ${question.number} -->\n  <question type="truefalse">\n    <name>\n      <text>\n        <![CDATA[${escapeCdata(question.heading)}]]>\n      </text>\n    </name>\n    <questiontext format="html">\n      <text>\n        <![CDATA[${escapeCdata(question.question)}]]>\n      </text>\n    </questiontext>\n    <answer fraction="${trueCorrect ? '100' : '0'}">\n      <text>\n        <![CDATA[true]]>\n      </text>\n    </answer>\n    <answer fraction="${trueCorrect ? '0' : '100'}">\n      <text>\n        <![CDATA[false]]>\n      </text>\n    </answer>\n  </question>`;
+				}
+				const answers = question.options.map(option => `\n    <answer fraction="${option.correct ? '100.000' : '0'}">\n      <text>\n        <![CDATA[${escapeCdata(option.text)}]]>\n      </text>\n    </answer>`).join('');
+				return `\n  <!-- Question entry ${question.number} -->\n  <question type="multichoice">\n    <name>\n      <text>\n        <![CDATA[${escapeCdata(question.heading)}]]>\n      </text>\n    </name>\n    <questiontext format="html">\n      <text>\n        <![CDATA[${escapeCdata(question.question)}]]>\n      </text>\n    </questiontext>${answers}\n    <shuffleanswers>0</shuffleanswers>\n    <single>true</single>\n    <answernumbering>123</answernumbering>\n  </question>`;
+			}).join('');
+			return `<?xml version="1.0" encoding="UTF-8"?>\n<!-- Generated with Moodle XML Converter https://moodlexml.fly.dev -->\n<quiz>\n  <question type="category">\n    <category>\n      <text>__Category Name__</text>\n    </category>\n  </question>${entries}\n</quiz>\n<!-- Generated with Moodle XML Converter https://moodlexml.fly.dev -->`;
+		}
+
+		function renderWarnings(questions) {
+			warningList.innerHTML = '';
+			if (!questions.length) {
+				warningList.innerHTML = '<li>Enter at least one question before previewing.</li>';
+				questionCount.textContent = 'No questions loaded';
+				return;
+			}
+			questions.forEach(question => {
+				if (!question.question) question.warnings.push('Question text is missing.');
+				if (question.type === 'truefalse') {
+					if (!['TRUE', 'FALSE'].includes(question.answer)) question.warnings.push('Answer must be True or False.');
+				} else {
+					if (question.options.length < 2) question.warnings.push('Add at least two answer options.');
+					if (!question.options.some(option => option.correct)) question.warnings.push('No correct answer was marked.');
+				}
+				const item = document.createElement('li');
+				item.textContent = question.warnings.length ? `Question ${question.number}: ${question.warnings.join(' ')}` : `Question ${question.number}: Ready to import.`;
+				if (!question.warnings.length) item.className = 'ok';
+				warningList.appendChild(item);
+			});
+			questionCount.textContent = `${questions.length} question${questions.length === 1 ? '' : 's'} loaded`;
+		}
+
+		function preview() {
+			const questions = parseQuestions(input.value);
+			renderWarnings(questions);
+			currentXml = questions.length ? buildXml(questions) : '';
+			xmlOutput.textContent = currentXml || 'Your generated Moodle XML will appear here.';
+			downloadButton.disabled = !currentXml;
+			status.textContent = currentXml ? 'Preview generated. Review the checks before downloading.' : 'Nothing to preview yet.';
+			status.className = currentXml ? 'status success' : 'status';
+		}
+
+		previewButton.addEventListener('click', preview);
+		downloadButton.addEventListener('click', () => {
+			if (!currentXml) return;
+			const blob = new Blob([currentXml], { type: 'application/xml;charset=utf-8' });
+			const link = document.createElement('a');
+			link.href = URL.createObjectURL(blob);
+			link.download = 'moodle-questions.xml';
+			link.click();
+			URL.revokeObjectURL(link.href);
+		});
+	</script>
+</body>
+</html>
+

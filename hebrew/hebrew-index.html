@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- Landing page for the Hebrew project with shortcuts to sub-apps -->
+<html lang="en">
+<head>
+    <!-- Page metadata and responsive viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hebrew Project</title>
+    <style>
+        /* Base page layout and background styling */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Centered white card wrapper */
+        .container {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 460px;
+        }
+
+        /* Page title spacing and size */
+        h1 {
+            margin-top: 0;
+            margin-bottom: 24px;
+            font-size: 26px;
+        }
+
+        /* Vertical button stack with spacing */
+        .button-row {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Shared styling for links and buttons */
+        .button-link, button {
+            padding: 14px 18px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Hover state for interactive controls */
+        .button-link:hover, button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Description text below the title */
+        .description {
+            margin-bottom: 20px;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        /* Back to main page styling for consistent appearance */
+        .back-to-main {
+
+            background: #eb8b25;
+        }
+
+        /* Hover state for Back to main page buttons */
+         .back-to-main:hover {
+            background: #c6751f;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page header for the Hebrew project selector -->
+        <h1>Hebrew Project</h1>
+        <p class="description">This page links directly to a page where you can read the Hebrew alphabet. Also there is a quiz available to test your knowledge.</p>
+
+        <!-- Shortcut buttons for each sub-app and returning home -->
+        <div class="button-row">
+            <a class="button-link" href="/hebrew/hebrew-letters.html">Open Hebrew letters reference</a>
+            <a class="button-link" href="/hebrew/quiz.html">Open Hebrew letters quiz</a>
+            
+            <a class="button-link back-to-main" href="/index.html">Back to main landing page</a>
+        </div>
+    </div>
+</body>
+</html>

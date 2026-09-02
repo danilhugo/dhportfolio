@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!-- Document type declaration for HTML5 -->
+<html lang="en">
+<head>
+    <!-- Page metadata and responsive viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hebrew Letters</title>
+    <!-- Embedded CSS styles for layout and typography -->
+    <style>
+        /* Base page styling for background and centered layout */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        /* Card-like white page container with rounded corners and shadow */
+        .page {
+            background: white;
+            width: 100%;
+            max-width: 700px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+        }
+
+        /* Header styling for the page title */
+        h1 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        /* Scrollable list area for the alphabet entries */
+        .alphabet-list {
+            max-height: 420px;
+            overflow-y: auto;
+            padding-right: 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px 16px;
+        }
+
+        /* Each letter row is a two-column grid with spacing */
+        .letter-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 22px;
+        }
+
+        /* Each letter row line span item height and alignment */
+        .letter-item span {
+    display: block;
+    float: left;
+    text-align: left;
+    line-height: 40px;
+}
+
+        /* Remove the bottom border for the last item */
+        .letter-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Styling for the Hebrew character to make it bold and large */
+        .hebrew {
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        /* Styling for the back navigation link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 16px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+                border: 2px solid;
+    padding: 1%;
+    border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Navigation link back to the homepage -->
+        <a class="back-link" href="/hebrew/hebrew-index.html">← Back</a>
+        <h1>Hebrew Letters</h1>
+
+        <!-- Scrollable list of Hebrew letters with their English names -->
+        <div class="alphabet-list">
+            <div class="letter-item"><span class="hebrew">א</span><span>Alef</span></div>
+            <div class="letter-item"><span class="hebrew">בּ</span><span>Bet</span></div>
+            <div class="letter-item"><span class="hebrew">ב</span><span>Vet</span></div>
+            <div class="letter-item"><span class="hebrew">ג</span><span>Gimel</span></div>
+            <div class="letter-item"><span class="hebrew">ד</span><span>Dalet</span></div>
+            <div class="letter-item"><span class="hebrew">ה</span><span>Hei</span></div>
+            <div class="letter-item"><span class="hebrew">ו</span><span>Vav</span></div>
+            <div class="letter-item"><span class="hebrew">ז</span><span>Zayin</span></div>
+            <div class="letter-item"><span class="hebrew">ח</span><span>Het</span></div>
+            <div class="letter-item"><span class="hebrew">ט</span><span>Tet</span></div>
+            <div class="letter-item"><span class="hebrew">י</span><span>Yod</span></div>
+            <div class="letter-item"><span class="hebrew">כּ</span><span>Kaf</span></div>
+            <div class="letter-item"><span class="hebrew">כ</span><span>Chaf</span></div>
+            <div class="letter-item"><span class="hebrew">ל</span><span>Lamed</span></div>
+            <div class="letter-item"><span class="hebrew">מ</span><span>Mem</span></div>
+            <div class="letter-item"><span class="hebrew">נ</span><span>Nun</span></div>
+            <div class="letter-item"><span class="hebrew">ס</span><span>Samech</span></div>
+            <div class="letter-item"><span class="hebrew">ע</span><span>Ayin</span></div>
+            <div class="letter-item"><span class="hebrew">פּ</span><span>Pe</span></div>
+            <div class="letter-item"><span class="hebrew">פ</span><span>Fe</span></div>
+            <div class="letter-item"><span class="hebrew">צ</span><span>Tsadi</span></div>
+            <div class="letter-item"><span class="hebrew">ק</span><span>Qof</span></div>
+            <div class="letter-item"><span class="hebrew">ר</span><span>Resh</span></div>
+            <div class="letter-item"><span class="hebrew">ש</span><span>Shin/Sin</span></div>
+            <div class="letter-item"><span class="hebrew">ת</span><span>Tav</span></div>
+        </div>
+    </div>
+</body>
+</html>

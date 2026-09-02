@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- Root HTML document for Hebrew Learning landing page -->
+<html lang="en">
+<head>
+    <!-- Page metadata and viewport settings for mobile support -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hebrew Learning</title>
+    <!-- Embedded styles for page layout and button appearance -->
+    <style>
+        /* Full-page body layout and background color */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Centered card container with padding and shadow */
+        .container {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 420px;
+        }
+
+        /* Main title spacing and size */
+        h1 {
+            margin-top: 0;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+
+        /* Vertical stack for navigation buttons */
+        .button-row {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Shared button/link styling for consistent appearance */
+        button, .button-link {
+            padding: 14px 18px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Hover state for interactive buttons */
+        button:hover, .button-link:hover {
+            background: #1d4ed8;
+        }
+
+        /* Back to main page styling for consistent appearance */
+        .back-to-main {
+
+            background: #eb8b25;
+        }
+
+        /* Hover state for Back to main page buttons */
+         .back-to-main:hover {
+            background: #c6751f;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main page wrapper with title and navigation buttons -->
+    <div class="container">
+        <h1>Main menu with projects</h1>
+        <div class="button-row">
+
+            <!-- Link to the new Hebrew project index page -->
+            <a class="button-link" href="/hebrew/hebrew-index.html">Hebrew project home</a>
+           <!--   <a class="button-link" href="/txt-to-xml-conv/converter-index.html">Converter project home</a>-->
+        </div>
+    </div>
+</body>
+</html>

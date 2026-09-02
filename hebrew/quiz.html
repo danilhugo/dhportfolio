@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!-- Hebrew letters quiz page with interactive multiple-choice cards -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hebrew Quiz</title>
+    <style>
+        /* Page-level layout and background */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        /* White card wrapper for quiz content */
+        .page {
+            background: white;
+            width: 100%;
+            max-width: 900px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+        }
+
+        /* Centered quiz heading */
+        h1 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        /* Grid layout for question cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        /* Individual question card styling */
+        .card {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Large letter display area */
+        .letter-box {
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 56px;
+            font-weight: bold;
+            background: #eef2ff;
+            border-radius: 10px;
+            color: #1d4ed8;
+        }
+
+        /* Dropdown styling for answer choices */
+        select {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 14px;
+        }
+
+        /* Feedback text placeholder */
+        .status {
+            font-weight: 600;
+            min-height: 20px;
+        }
+
+        /* Correct and incorrect feedback colors */
+        .correct {
+            color: #15803d;
+        }
+
+        .incorrect {
+            color: #b91c1c;
+        }
+
+        /* Action buttons container */
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        /* Button appearance */
+        button {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Utility class to hide elements */
+        .hidden {
+            display: none;
+        }
+
+        /* Back link styling */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 16px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+                border: 2px solid;
+    padding: 1%;
+    border-radius: 15px;
+        }
+
+        /* Responsive single-column layout on smaller screens */
+        @media (max-width: 760px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Navigation back to the landing page -->
+        <a class="back-link" href="hebrew-index.html">← Back</a>
+        <h1>Hebrew Letters Quiz</h1>
+
+        <!-- Container where question cards are dynamically generated -->
+        <div id="quizContainer" class="grid"></div>
+
+        <!-- Submit and new quiz controls -->
+        <div class="actions">
+            <!-- Submit button triggers quiz answer validation -->
+            <button id="submitBtn" type="button">Submit</button>
+            <!-- New quiz button resets the quiz after submission -->
+            <button id="newQuizBtn" class="hidden" type="button">New quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // List of Hebrew letters and their English transliterations
+        const letters = [
+            { symbol: 'א', name: 'Alef' },
+            { symbol: 'בּ', name: 'Bet' },
+            { symbol: 'ב', name: 'Vet' },
+            { symbol: 'ג', name: 'Gimel' },
+            { symbol: 'ד', name: 'Dalet' },
+            { symbol: 'ה', name: 'Hei' },
+            { symbol: 'ו', name: 'Vav' },
+            { symbol: 'ז', name: 'Zayin' },
+            { symbol: 'ח', name: 'Het' },
+            { symbol: 'ט', name: 'Tet' },
+            { symbol: 'י', name: 'Yod' },
+            { symbol: 'כּ', name: 'Kaf' },
+            { symbol: 'כ', name: 'Chaf' },
+            { symbol: 'ל', name: 'Lamed' },
+            { symbol: 'מ', name: 'Mem' },
+            { symbol: 'נ', name: 'Nun' },
+            { symbol: 'ס', name: 'Samech' },
+            { symbol: 'ע', name: 'Ayin' },
+            { symbol: 'פּ', name: 'Pe' },
+            { symbol: 'פ', name: 'Fe' },
+            { symbol: 'צ', name: 'Tsadi' },
+            { symbol: 'ק', name: 'Qof' },
+            { symbol: 'ר', name: 'Resh' },
+            { symbol: 'ש', name: 'Shin/Sin' },
+            { symbol: 'ת', name: 'Tav' }
+        ];
+
+        // Select important DOM elements once for reuse
+        const quizContainer = document.getElementById('quizContainer'); // container for rendered quiz cards
+        const submitBtn = document.getElementById('submitBtn'); // button to submit answers
+        const newQuizBtn = document.getElementById('newQuizBtn'); // button to start a new quiz
+        let currentQuestions = []; // stores the current set of quiz questions
+
+        // Return a shuffled copy of an array without mutating the original
+        function shuffle(array) {
+            const copy = [...array]; // create a copy so the original array stays unchanged
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1)); // pick a random index from 0 to i
+                [copy[i], copy[j]] = [copy[j], copy[i]]; // swap the elements at positions i and j
+            }
+            return copy; // return the new shuffled array
+        }
+
+        // Create a single quiz question with one correct answer and three wrong options
+        function makeQuestion() {
+            const correct = letters[Math.floor(Math.random() * letters.length)]; // select a random correct letter
+            const distractors = shuffle(letters.filter(item => item.name !== correct.name)).slice(0, 3); // pick 3 other letters as wrong answers
+            const options = shuffle([correct, ...distractors]); // shuffle the correct and wrong answers together
+            return {
+                ...correct, // include the chosen correct letter symbol and name
+                options: options.map(item => item.name) // store only answer text options for the dropdown
+            };
+        }
+
+        // Render the full quiz by generating question cards in the page
+        function renderQuiz() {
+            // Choose unique correct letters by sampling without replacement
+            const shuffled = shuffle(letters);
+            const selectedCorrects = shuffled.slice(0, 4); // pick first 4 unique letters
+
+            // Build questions from the unique correct letters
+            currentQuestions = selectedCorrects.map((correct) => {
+                const distractors = shuffle(letters.filter(item => item.name !== correct.name)).slice(0, 3);
+                const options = shuffle([correct, ...distractors]);
+                return {
+                    ...correct,
+                    options: options.map(item => item.name)
+                };
+            });
+
+            quizContainer.innerHTML = ''; // clear any existing quiz cards
+
+            currentQuestions.forEach((question) => {
+                const card = document.createElement('div'); // create a new card for each question
+                card.className = 'card'; // apply card styling
+
+                card.innerHTML = `
+                    <div class="letter-box">${question.symbol}</div>
+                    <select>
+                        <option value="">Choose the letter name</option>
+                        ${question.options.map(option => `<option value="${option}">${option}</option>`).join('')}
+                    </select>
+                    <div class="status"></div>
+                `; // build the HTML for the question card
+
+                quizContainer.appendChild(card); // add the card to the quiz container
+            });
+
+            submitBtn.classList.remove('hidden'); // show the submit button after rendering
+            newQuizBtn.classList.add('hidden'); // hide the new quiz button until after submission
+        }
+
+        // Evaluate all answers and show feedback for each question
+        submitBtn.addEventListener('click', () => {
+            const cards = quizContainer.querySelectorAll('.card'); // find all question cards in the quiz
+
+            cards.forEach((card, index) => {
+                const select = card.querySelector('select'); // get the dropdown for this card
+                const status = card.querySelector('.status'); // get the feedback area for this card
+                const selectedValue = select.value; // read the user-selected answer
+                const correctAnswer = currentQuestions[index].name; // get the correct answer for this card
+
+                if (!selectedValue) {
+                    status.textContent = 'Please choose an option.'; // ask the user to select an answer
+                    status.className = 'status incorrect'; // mark this question as incorrect
+                } else if (selectedValue === correctAnswer) {
+                    status.textContent = 'Correct!'; // show correct feedback
+                    status.className = 'status correct'; // style the feedback as correct
+                } else {
+                    status.textContent = `Not correct. The correct answer is ${correctAnswer}.`; // show the correct answer
+                    status.className = 'status incorrect'; // style the feedback as incorrect
+                }
+            });
+
+            submitBtn.classList.add('hidden'); // hide the submit button after checking answers
+            newQuizBtn.classList.remove('hidden'); // show the new quiz button so the user can try again
+        });
+
+        // Start a new quiz when the user clicks the button
+        newQuizBtn.addEventListener('click', renderQuiz);
+
+        // Render the quiz on page load
+        renderQuiz();
+    </script>
+</body>
+</html>
