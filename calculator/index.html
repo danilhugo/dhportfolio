@@ -47,8 +47,12 @@
             gap: 10px;
         }
 
-        /* Shared button styling keeps every key the same size. */
+        /* Shared button styling keeps controls consistent across the page. */
+        .button-link,
         button {
+            display: inline-block;
+            padding: 14px 18px;
+            box-sizing: border-box;
             min-height: 52px;
             border: none;
             border-radius: 8px;
@@ -56,6 +60,8 @@
             color: white;
             font-size: 18px;
             cursor: pointer;
+            text-decoration: none;
+            text-align: center;
         }
 
         /* Operator keys use a contrasting color for quick scanning. */
@@ -74,14 +80,26 @@
         }
 
         /* Provide visual feedback while a key is pressed. */
+        .button-link:hover,
         button:hover {
             filter: brightness(0.9);
+        }
+
+        /* Back to main page styling for consistent appearance */
+        .back-to-main {
+            background: #eb8b25;
+        }
+
+        /* Hover state for Back to main page buttons */
+         .back-to-main:hover {
+            background: #c6751f;
         }
     </style>
 </head>
 <body>
     <!-- Calculator interface contains the display and keypad controls. -->
     <main class="calculator">
+        <a class="button-link back-to-main" href="../index.html">Back to main landing page</a>
         <h1>Calculator</h1>
         <!-- Read-only display prevents direct entry of unsupported expressions. -->
         <input id="display" type="text" value="0" aria-label="Calculator display" readonly>
