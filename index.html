@@ -66,6 +66,28 @@
             color: black;
             font-weight: bold;
         }
+        img.profile-pic {
+            width: 30%;
+            border-radius: 30%;
+        }
+
+        .project-list {
+            display: block;
+            position: relative;
+            width: 100%;
+        }
+
+        .project-item {
+            display: block;
+            width: 98%;
+            padding: 1%;
+            margin: 1% 0;
+        }
+
+        img.project-screenshot {
+            width: 48%;
+            display: inline-block;
+        }
       
     </style>
 </head>
@@ -85,7 +107,7 @@
                 <h1>Welcome to Daniël's Portfolio</h1>
                 <p>This is the landing page of my personal portfolio website as a Aspiring Web Content Developer / CMS Developer. Explore my projects, learn more about me, and feel free to get in touch! </p>
             </header>
-            <section id="about" class="buttons">
+            <section id="about" class="page-sections">
                 <h2>Daniël de Villier Hugo</h2>
                     <h3>Web Content Developer / CMS Developer</h3>
                 <h2>About Me</h2>
@@ -113,7 +135,7 @@
                 <h2>Tech & Tools</h2>
                     <p>Moodle · WordPress · OJS · Google Sites · HTML · CSS · SQL reporting · GitHub · Gemini · GPT · GitHub Copilot · CMS administration · Content workflows · Technical support · Training · Quality control · Documentation</p>
             </section>
-            <section id="projects" class="buttons">
+            <section id="projects" class="page-sections">
                 <h2>My Projects</h2>
                 <p>Here are some of the projects I've worked on. Feel free to explore and see what I can do!</p>
                 <div class="project-list">
@@ -122,6 +144,13 @@
                         <p>Developed a simple calculator application with a user-friendly interface.</p>
                         <img src="./images/calc.png" alt="Calculator Project Screenshot" class="project-screenshot">
                         <button class="project-button" onclick="window.location.href='calculator/index.html'">View Project</button>
+                    </div>
+                    <div class="project-item">
+                        <h3>Project 2: Making a language learning page with interactive quiz</h3>
+                        <p>Developed a simple language learning application with a user-friendly interface.</p>
+                        <img src="./images/heb1.png" alt="Language Learning App Screenshot1" class="project-screenshot">
+                        <img src="./images/heb2.png" alt="Language Learning App Screenshot2" class="project-screenshot">
+                        <button class="project-button" onclick="window.location.href='hebrew/hebrew-index.html'">View Project</button>
                     </div>
                     <!-- <div class="project-item">
                         <h3>Project 1: Moodle Course Setup</h3>
@@ -141,7 +170,7 @@
                 </div>
                 
             </section>
-            <section id="contact" class="buttons">
+            <section id="contact" class="page-sections">
                 <h2>Contact Me</h2>
                 <p>Have a question or want to work together? Have a look at my LinkedIn profile and contact me on there or have a look at my github page. I'll get back to you as soon as possible!</p>
                 <p>LinkedIn: <a href="https://www.linkedin.com/in/daniëlhugo-67596179" target="_blank">www.linkedin.com/in/daniëlhugo-67596179</a></p>
