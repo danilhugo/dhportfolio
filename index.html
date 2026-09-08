@@ -33,16 +33,23 @@
             background: #E7FFE3;
             position: relative;
         }
-        .nav {
+        .content {
             display: block;
             width: 100%;
+            margin: 100px 0 0 0;
+        }
+        .nav {
+            display: block;
+            width: 96%;
             float: left;
             border: #48a11b 1px solid;
             border-radius: 10px;
             box-shadow: 2px 2px 10px #48a11b;
             margin-bottom: 2%;
             background: #48A11B;
-            background: linear-gradient(270deg, rgb(72 161 27 / 50%) 0%, rgb(171 247 40 / 50%) 50%);
+            background: linear-gradient(270deg, rgb(72 161 27 / 75%) 0%, rgb(171 247 40 / 75%) 50%);
+            position: fixed;
+            z-index: 1;
         }
         ul.nav-list {
             display: block;
@@ -66,6 +73,10 @@
             color: black;
             font-weight: bold;
         }
+        .page-sections {
+            display: block;
+            width: 100%;
+        }
         img.profile-pic {
             width: 30%;
             border-radius: 30%;
@@ -79,14 +90,27 @@
 
         .project-item {
             display: block;
-            width: 98%;
+            width: 48%;
             padding: 1%;
             margin: 1% 0;
+            border: 2px solid #48a11b;
+            border-radius: 10px;
         }
 
         img.project-screenshot {
             width: 48%;
             display: inline-block;
+        }
+        button {
+            display: block;
+            padding: 2%;
+            border: #48a11b 3px solid;
+            border-radius: 5px;
+            margin: 1% 1% 1% 0;
+            background: transparent;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
         }
       
     </style>
