@@ -8,6 +8,29 @@
     <title>Daniel portfolio</title>
     <!-- Embedded styles for page layout and button appearance -->
     <style>
+        .container{
+                display: block;
+                width: 98%;
+                padding: 1%;
+                background: lightgreen;
+        }
+        .nav {
+            display: block;
+            width: 100%;
+            float: left;
+            border: 1px solid;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px;
+        }
+        li.nav-item {
+            list-style: none;
+            display: block;
+            padding: 1%;
+            border: 1px solid;
+            border-radius: 5px;
+            float: left;
+            margin: 0 1% 1% 0;
+        }
       
     </style>
 </head>
@@ -31,7 +54,7 @@
                 <h2>Daniël de Villier Hugo</h2>
                     <h3>Web Content Developer / CMS Developer</h3>
                 <h2>About Me</h2>
-                    <p>I am a passionate Web Content Developer / CMS Developer with a strong foundation in frontend and a bit of backend technologies. I enjoy creating innovative simplistic solutions that can help people with day to day needs.</p>
+                    <p>I am a passionate Web Content Developer / CMS Developer with a strong foundation in frontend and a bit of backend technologies. I enjoy creating innovative simplistic solutions that can help people with day to day needs. I have also recently started using GitHub much more and make use of tools such as Gemini, GPT, and GitHub Copilot to help me develop code quickly and efficiently.</p>
                     <img src="./images/Danielprofile.png" alt="Profile Picture" class="profile-pic">
                 <h2>History</h2>
                     <p>I’m a Web Content Developer and CMS Developer with a strong background in eLearning platforms, Moodle administration, technical support, and content management systems. My work focuses on building, maintaining, and improving digital learning spaces that are reliable, user-friendly, and easy for teams to manage.</p>
@@ -53,11 +76,34 @@
                     <li>Hands-on experience with open-source platforms, technical documentation, content workflows, quality control, and client-facing support.</li>
                 </ul>
                 <h2>Tech & Tools</h2>
-                    <p>Moodle · WordPress · OJS · Google Sites · HTML · CSS · SQL reporting · CMS administration · Content workflows · Technical support · Training · Quality control · Documentation</p>
+                    <p>Moodle · WordPress · OJS · Google Sites · HTML · CSS · SQL reporting · GitHub · Gemini · GPT · GitHub Copilot · CMS administration · Content workflows · Technical support · Training · Quality control · Documentation</p>
             </section>
             <section id="projects" class="buttons">
                 <h2>My Projects</h2>
                 <p>Here are some of the projects I've worked on. Feel free to explore and see what I can do!</p>
+                <div class="project-list">
+                    <div class="project-item">
+                        <h3>Project 1: Making a calculator</h3>
+                        <p>Developed a simple calculator application with a user-friendly interface.</p>
+                        <img src="./images/calc.png" alt="Calculator Project Screenshot" class="project-screenshot">
+                        <button class="project-button" onclick="window.location.href='calculator/index.html'">View Project</button>
+                    </div>
+                    <!-- <div class="project-item">
+                        <h3>Project 1: Moodle Course Setup</h3>
+                        <p>Developed and configured a comprehensive Moodle course for an online learning program, including content loading, activity setup, and user management.</p>
+                        <img src="./images/moodleproject.png" alt="Moodle Project Screenshot" class="project-screenshot">
+                    </div>
+                    <div class="project-item">
+                        <h3>Project 2: WordPress Website Development</h3>
+                        <p>Created a responsive WordPress website for a client, implementing custom themes, plugins, and SEO optimization to enhance user experience.</p>
+                        <img src="./images/wordpressproject.png" alt="WordPress Project Screenshot" class="project-screenshot"> 
+                    </div>
+                    <div class="project-item">
+                        <h3>Project 3: OJS Journal Management</h3>
+                        <p>Managed the setup and maintenance of an Open Journal Systems (OJS) platform for academic publishing, ensuring smooth submission and review processes.</p>
+                    </div> -->
+
+                </div>
                 
             </section>
             <section id="contact" class="buttons">
