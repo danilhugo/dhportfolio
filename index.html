@@ -1,90 +1,77 @@
 <!DOCTYPE html>
-<!-- Root HTML document for Hebrew Learning landing page -->
+<!-- Root HTML document for Daniel's portfolio landing page -->
 <html lang="en">
 <head>
     <!-- Page metadata and viewport settings for mobile support -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hebrew Learning</title>
+    <title>Daniel portfolio</title>
     <!-- Embedded styles for page layout and button appearance -->
     <style>
-        /* Full-page body layout and background color */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Centered card container with padding and shadow */
-        .container {
-            background: white;
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 90%;
-            max-width: 420px;
-        }
-
-        /* Main title spacing and size */
-        h1 {
-            margin-top: 0;
-            margin-bottom: 24px;
-            font-size: 24px;
-        }
-
-        /* Vertical stack for navigation buttons */
-        .button-row {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        /* Shared button/link styling for consistent appearance */
-        button, .button-link {
-            padding: 14px 18px;
-            border: none;
-            border-radius: 10px;
-            background: #2563eb;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        /* Hover state for interactive buttons */
-        button:hover, .button-link:hover {
-            background: #1d4ed8;
-        }
-
-        /* Back to main page styling for consistent appearance */
-        .back-to-main {
-
-            background: #eb8b25;
-        }
-
-        /* Hover state for Back to main page buttons */
-         .back-to-main:hover {
-            background: #c6751f;
-        }
+      
     </style>
 </head>
 <body>
     <!-- Main page wrapper with title and navigation buttons -->
     <div class="container">
-        <h1>Main menu with projects</h1>
-        <div class="button-row">
+        <div class="nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="#about">About</a></li>
+                <li class="nav-item"><a href="#projects">Projects</a></li>
+                <li class="nav-item"><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <header>
+                <h1>Welcome to Daniël's Portfolio</h1>
+                <p>This is the landing page of my personal portfolio website as a Aspiring Web Content Developer / CMS Developer. Explore my projects, learn more about me, and feel free to get in touch! </p>
+            </header>
+            <section id="about" class="buttons">
+                <h2>Daniël de Villier Hugo</h2>
+                    <h3>Web Content Developer / CMS Developer</h3>
+                <h2>About Me</h2>
+                    <p>I am a passionate Web Content Developer / CMS Developer with a strong foundation in frontend and a bit of backend technologies. I enjoy creating innovative simplistic solutions that can help people with day to day needs.</p>
+                    <img src="./images/Danielprofile.png" alt="Profile Picture" class="profile-pic">
+                <h2>History</h2>
+                    <p>I’m a Web Content Developer and CMS Developer with a strong background in eLearning platforms, Moodle administration, technical support, and content management systems. My work focuses on building, maintaining, and improving digital learning spaces that are reliable, user-friendly, and easy for teams to manage.</p>
+                    <p>My path started in technical support and academic IT environments, where I gained hands-on experience with computer labs, user support, equipment setup, training, and troubleshooting. Over time, that foundation grew into specialised work with Moodle, WordPress, OJS, Google Sites, HTML, CSS, reporting, and platform administration.</p>
+                    <p>Outside of technology, I also have a background as a pilot, which shaped the way I approach my work: with attention to detail, clear communication, calm problem-solving, and a strong focus on procedures, safety, and reliability.</p>
+                <h2>What I do</h2>
+                    <ul>
+                        <li>Develop, update, and maintain content across CMS and eLearning platforms</li>
+                        <li>Administer and support Moodle, WordPress, OJS, and Google Sites environments</li>
+                        <li>Use HTML and CSS to improve page layouts, themes, and user experience</li>
+                        <li>Support course setup, content loading, platform configuration, and quality control</li>
+                        <li>Create SQL-based reports and platform insights for operational decision-making</li>
+                        <li>Provide clear technical support, documentation, and training for users and teams</li>
+                    </ul>
+                <h2>Experience Highlights</h2>
+                <ul>
+                    <li>Senior eLearning Support Technician at AOSIS, supporting Moodle installations, CMS updates, training, reporting, troubleshooting, and platform improvements.</li>
+                    <li>Previous technical experience at Cape Peninsula University of Technology, including lab support, equipment maintenance, tutoring, conference setup, and user assistance.</li>
+                    <li>Hands-on experience with open-source platforms, technical documentation, content workflows, quality control, and client-facing support.</li>
+                </ul>
+                <h2>Tech & Tools</h2>
+                    <p>Moodle · WordPress · OJS · Google Sites · HTML · CSS · SQL reporting · CMS administration · Content workflows · Technical support · Training · Quality control · Documentation</p>
+            </section>
+            <section id="projects" class="buttons">
+                <h2>My Projects</h2>
+                <p>Here are some of the projects I've worked on. Feel free to explore and see what I can do!</p>
+                
+            </section>
+            <section id="contact" class="buttons">
+                <h2>Contact Me</h2>
+                <p>Have a question or want to work together? Have a look at my LinkedIn profile and contact me on there or have a look at my github page. I'll get back to you as soon as possible!</p>
+                <p>LinkedIn: <a href="https://www.linkedin.com/in/daniëlhugo-67596179" target="_blank">www.linkedin.com/in/daniëlhugo-67596179</a></p>
+                <p>GitHub: <a href="https://github.com/danilhugo" target="_blank">https://github.com/danilhugo</a></p>
+                <p>GitHub (portfolio): <a href="https://github.com/danilhugo/dhportfolio" target="_blank">https://github.com/danilhugo/dhportfolio</a></p>
+                
+            </section>
+            <footer>
+                <p>&copy; 2026 by Daniël Hugo. Built from scratch.</p>
+            </footer>
 
-            <!-- Link to the new Hebrew project index page -->
-            <a class="button-link" href="hebrew/hebrew-index.html">Hebrew project home</a>
-            <!-- Link to the calculator project index page -->
-            <a class="button-link" href="calculator/index.html">Calculator project home</a>
-           <!--   <a class="button-link" href="/txt-to-xml-conv/converter-index.html">Converter project home</a>-->
         </div>
     </div>
 </body>
